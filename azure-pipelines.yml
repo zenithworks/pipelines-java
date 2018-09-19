@@ -19,15 +19,27 @@ steps:
 #    goals: 'package'
 
 #build java app using ant
-- task: Ant@1
+#- task: Ant@1
+#  inputs:
+#    workingDirectory: ''
+#    buildFile: 'build.xml'
+#    javaHomeOption: 'JDKVersion'
+#    jdkVersionOption: '1.10'
+#    jdkArchitectureOption: 'x64'
+#    publishJUnitResults: false
+#    testResultsFiles: '**/TEST-*.xml'
+
+- task: Gradle@2
   inputs:
     workingDirectory: ''
-    buildFile: 'build.xml'
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.10'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
+    tasks: 'build'
 
 - task: CopyFiles@2
   inputs:
