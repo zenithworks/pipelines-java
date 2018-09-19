@@ -7,16 +7,27 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 steps:
-- task: Maven@3
+#- task: Maven@3
+#  inputs:
+#    mavenPomFile: 'pom.xml'
+#    mavenOptions: '-Xmx3072m'
+#    javaHomeOption: 'JDKVersion'
+#    jdkVersionOption: '1.10'
+#    jdkArchitectureOption: 'x64'
+#    publishJUnitResults: true
+#    testResultsFiles: '**/TEST-*.xml'
+#    goals: 'package'
+
+#build java app using ant
+- task: Ant@1
   inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
+    workingDirectory: ''
+    buildFile: 'build.xml'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.10'
     jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
+    publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
-    goals: 'package'
 
 - task: CopyFiles@2
   inputs:
